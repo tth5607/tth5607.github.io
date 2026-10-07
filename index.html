@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler Hsiao | Computer Science & Finance Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#0f172a',
+                            accent: '#cc0033', // Rutgers Scarlet accent
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- STICKY NAVBAR -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Name -->
+                <a href="#hero" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-brand-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-red-700 text-white flex items-center justify-center text-sm font-extrabold shadow-md">TH</span>
+                    <span>Tyler Hsiao</span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">About</a>
+                    <a href="#education" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">Education</a>
+                    <a href="#experience" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">Experience</a>
+                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">Projects</a>
+                    <a href="#leadership" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">Leadership</a>
+                    <a href="#skills" class="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">Skills</a>
+                </nav>
+
+                <!-- Actions: Theme Switcher & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors" aria-label="Toggle Theme">
+                        <i id="themeMoon" class="fa-solid fa-moon hidden text-lg"></i>
+                        <i id="themeSun" class="fa-solid fa-sun text-lg text-amber-400"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+            <a href="#education" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Education</a>
+            <a href="#experience" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+            <a href="#leadership" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Leadership</a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-slate-100/70 via-slate-50 to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                    
+                    <div class="text-center lg:text-left max-w-2xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-950/60 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                            <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span> Rutgers Honors College Student
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                            Hi, I'm <span class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 bg-clip-text text-transparent">Tyler Hsiao</span>
+                        </h1>
+                        <p class="mt-4 text-xl sm:text-2xl font-medium text-slate-600 dark:text-slate-300">
+                            Computer Science & Finance Dual Major
+                        </p>
+                        <p class="mt-2 text-base text-slate-500 dark:text-slate-400">
+                            Rutgers University - New Brunswick | Class of 2029
+                        </p>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed text-balance">
+                            Passionate about bridging technology and quantitative financial systems. Experienced in Python, Java, automated data-extraction algorithms, and algorithmic macro trading strategies.
+                        </p>
+
+                        <!-- Quick Contact Buttons/Links -->
+                        <div class="mt-8 flex flex-wrap gap-3 justify-center lg:justify-start">
+                            <a href="mailto:tth56@scarletmail.rutgers.edu" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white text-sm font-semibold shadow-sm transition-transform active:scale-95">
+                                <i class="fa-solid fa-envelope"></i> Email
+                            </a>
+                            <a href="https://linkedin.com/in/tyler-hsiao" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 text-white text-sm font-semibold shadow-sm transition-transform active:scale-95">
+                                <i class="fa-brands fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="https://github.com/tylerthsiao" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-semibold transition-transform active:scale-95">
+                                <i class="fa-brands fa-github"></i> GitHub
+                            </a>
+                            <button onclick="copyToClipboard('201-486-4018', 'Phone number copied!')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-semibold transition-transform active:scale-95" title="Click to copy phone number">
+                                <i class="fa-solid fa-phone"></i> 201-486-4018
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="w-full max-w-sm bg-white dark:bg-slate-800/90 rounded-2xl p-6 shadow-xl border border-slate-200/80 dark:border-slate-700/80 backdrop-blur-sm">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Quick Overview</span>
+                            <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">GPA 3.958</span>
+                        </div>
+                        <div class="space-y-4 pt-4 text-sm">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-graduation-cap text-red-600 dark:text-red-400 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-slate-900 dark:text-white">Rutgers Honors College</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">The Dean's Scholarship Recipient</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-laptop-code text-blue-600 dark:text-blue-400 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-slate-900 dark:text-white">Software Engineering</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">NetSuite, SuiteScript, Automation at Noom</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-trophy text-amber-500 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-slate-900 dark:text-white">Trading Winner</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">Best Rutgers Team | Trade the Knight</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education" class="py-16 bg-white dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2.5 rounded-xl bg-red-100 dark:bg-red-950/80 text-red-700 dark:text-red-400">
+                        <i class="fa-solid fa-university text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Education</h2>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700/60 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-700">
+                        <div>
+                            <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Rutgers University - New Brunswick</h3>
+                            <p class="text-red-700 dark:text-red-400 font-medium text-base mt-0.5">
+                                Bachelor of Science in Computer Science & Bachelor of Science in Finance
+                            </p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">New Brunswick, NJ</p>
+                        </div>
+                        <div class="md:text-right">
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold">
+                                Sept 2025 – May 2029
+                            </span>
+                            <div class="mt-2 text-sm font-bold text-slate-900 dark:text-slate-100">
+                                Cumulative GPA: <span class="text-emerald-600 dark:text-emerald-400">3.958</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Honors & Awards -->
+                    <div class="mt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Honors & Awards</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-xs font-semibold border border-amber-200 dark:border-amber-900/50">
+                                <i class="fa-solid fa-award mr-1.5"></i> Honors College
+                            </span>
+                            <span class="px-3 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-xs font-semibold border border-amber-200 dark:border-amber-900/50">
+                                <i class="fa-solid fa-star mr-1.5"></i> The Dean's Scholarship
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Coursework Pills -->
+                    <div class="mt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Relevant Coursework</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Data Structures and Algorithms
+                            </span>
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Computer Architecture
+                            </span>
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Intro to Computer Science
+                            </span>
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Introductory Linear Algebra
+                            </span>
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Financial Management
+                            </span>
+                            <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+                                Intro to Financial Accounting
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-16 bg-slate-50 dark:bg-slate-900">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-10">
+                    <div class="p-2.5 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400">
+                        <i class="fa-solid fa-briefcase text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Work Experience</h2>
+                </div>
+
+                <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 sm:before:left-6 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+                    
+                    <!-- Item 1: Noom Software Engineering Intern -->
+                    <div class="relative pl-10 sm:pl-14">
+                        <div class="absolute left-1.5 sm:left-3.5 top-1.5 -translate-x-1/2 w-6 h-6 rounded-full bg-blue-600 ring-4 ring-slate-50 dark:ring-slate-900 flex items-center justify-center text-white text-xs">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Software Engineering Intern</h3>
+                                    <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm">Noom <span class="text-slate-400 font-normal">| Princeton, NJ</span></p>
+                                </div>
+                                <span class="inline-block px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-xs font-semibold self-start sm:self-center">
+                                    May 2026 – August 2026
+                                </span>
+                            </div>
+                            <ul class="space-y-2.5 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-blue-500 mt-1"></i>
+                                    <span>Developed an automated auditing program integrated with NetSuite SuiteScript to query and extract vendor and bill records, <strong>reducing audit processing time by roughly 50%</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-blue-500 mt-1"></i>
+                                    <span>Built task-automation programs for internal accounting tools, scanning through thousands of vendor bills to retrieve relevant bill details, payment records, and invoice receipts.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-blue-500 mt-1"></i>
+                                    <span>Translated audit team requirements and requests into an efficient and functional NetSuite tool, adjusting based on auditor feedback and testing.</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50 flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">NetSuite</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">SuiteScript</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">Process Automation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Noom Accounting/Finance Intern -->
+                    <div class="relative pl-10 sm:pl-14">
+                        <div class="absolute left-1.5 sm:left-3.5 top-1.5 -translate-x-1/2 w-6 h-6 rounded-full bg-emerald-600 ring-4 ring-slate-50 dark:ring-slate-900 flex items-center justify-center text-white text-xs">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Accounting / Finance Intern</h3>
+                                    <p class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm">Noom <span class="text-slate-400 font-normal">| Princeton, NJ</span></p>
+                                </div>
+                                <span class="inline-block px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-semibold self-start sm:self-center">
+                                    July 2025 – August 2025
+                                </span>
+                            </div>
+                            <ul class="space-y-2.5 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-emerald-500 mt-1"></i>
+                                    <span>Migrated 1000+ bank statements and tax documents (W-9s, W-8BENs, W-8BEN-Es) from Google Drive to Dropbox and vendor records from Tipalti to Oracle NetSuite.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-emerald-500 mt-1"></i>
+                                    <span>Tested ChatGPT Agent Mode for navigating vendor records and automating data-extraction tasks.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-angle-right text-emerald-500 mt-1"></i>
+                                    <span>Documented 150+ American Express transactions made by C-suite executives to support bookkeeping.</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50 flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">Oracle NetSuite</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">Tipalti</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">Data Migration</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs">AI Agents</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-16 bg-white dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2.5 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-400">
+                        <i class="fa-solid fa-rocket text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Project 1: Sous Chef Assistant -->
+                    <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-semibold">Python Project</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400">Aug 2026 – Present</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Sous Chef Assistant</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                                Engineered a Python-based sous chef assistant that parses and filters 200,000+ recipe records based on user-provided ingredients and guides them step-by-step through recipe preparation.
+                            </p>
+                            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-xs mb-6">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-purple-600 dark:text-purple-400 mt-0.5"></i>
+                                    <span>Built recipe search & filtering functionality using Pandas and Python CLI.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-purple-600 dark:text-purple-400 mt-0.5"></i>
+                                    <span>Integrated external data lookup through Wikipedia API library for contextual knowledge.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-2 items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">Python</span>
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">Pandas</span>
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">CLI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Rutgers Trade the Knight -->
+                    <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-xs font-semibold">🏆 Best Rutgers Team</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400">April 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Trade the Knight Competition</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                                Collaborated in a three-person team to develop a Python-based macro trading strategy that won <strong>Best Rutgers Team</strong> in the Trade the Knight Competition.
+                            </p>
+                            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-xs mb-6">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 mt-0.5"></i>
+                                    <span>Designed a systematic strategy incorporating yield, momentum, event signals, and risk metrics.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 mt-0.5"></i>
+                                    <span>Monitored Sharpe ratios throughout the competition and dynamically adjusted allocation.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-2 items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">Python</span>
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">Macro Trading</span>
+                                <span class="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">Quant Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERSHIP SECTION -->
+        <section id="leadership" class="py-16 bg-slate-50 dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-400">
+                        <i class="fa-solid fa-users text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Leadership & Activities</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Rutgers Asian Student Council</h3>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Sept 2025 – Present</span>
+                        </div>
+                        <p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider mb-3">Fundraising Chair</p>
+                        <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check-circle text-amber-500 mt-1"></i>
+                                <span>Collaborated with fellow E-Board members to host 8+ events each year, connecting 300+ students.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check-circle text-amber-500 mt-1"></i>
+                                <span>Directed multiple bake sales, coordinating food preparation, pricing strategy, promotion, and sales operations.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">APIAVote</h3>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Sept 2026 – Present</span>
+                        </div>
+                        <p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider mb-3">Youth Ambassador</p>
+                        <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check-circle text-amber-500 mt-1"></i>
+                                <span>Represented organization and spoke at NYMU Philadelphia Summit, delivering a presentation to 75+ attendees.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check-circle text-amber-500 mt-1"></i>
+                                <span>Orchestrated voter registration & awareness events each semester, reaching over 200 students.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS & CERTIFICATIONS SECTION -->
+        <section id="skills" class="py-16 bg-white dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-10">
+                    <div class="p-2.5 rounded-xl bg-teal-100 dark:bg-teal-950/80 text-teal-700 dark:text-teal-400">
+                        <i class="fa-solid fa-sliders text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Technical Skills & Certifications</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Languages -->
+                    <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60">
+                        <div class="flex items-center gap-2 mb-4 text-slate-900 dark:text-white font-bold text-base">
+                            <i class="fa-solid fa-code text-teal-600 dark:text-teal-400"></i>
+                            <span>Programming Languages</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">Python</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">Java</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">C</span>
+                        </div>
+                    </div>
+
+                    <!-- Developer Tools & Libraries -->
+                    <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60">
+                        <div class="flex items-center gap-2 mb-4 text-slate-900 dark:text-white font-bold text-base">
+                            <i class="fa-solid fa-screwdriver-wrench text-teal-600 dark:text-teal-400"></i>
+                            <span>Developer Tools & Libraries</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">GitHub</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">VS Code</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">IntelliJ</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">Pandas</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold shadow-xs">Oracle NetSuite</span>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60">
+                        <div class="flex items-center gap-2 mb-4 text-slate-900 dark:text-white font-bold text-base">
+                            <i class="fa-solid fa-certificate text-teal-600 dark:text-teal-400"></i>
+                            <span>Certifications</span>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-shield-check text-teal-500"></i>
+                                <span>S&P Capital IQ Pro 101</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-shield-check text-teal-500"></i>
+                                <span>Bloomberg Market Concepts</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-shield-check text-teal-500"></i>
+                                <span>Bloomberg Finance Fundamentals</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-shield-check text-teal-500"></i>
+                                <span>Bloomberg ESG</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 z-50 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 text-sm font-medium pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-lg"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <p class="text-white font-bold text-lg">Tyler Hsiao</p>
+                <p class="text-xs text-slate-500 mt-1">Computer Science & Finance @ Rutgers University</p>
+            </div>
+            
+            <div class="flex items-center gap-6 text-sm">
+                <a href="mailto:tth56@scarletmail.rutgers.edu" class="hover:text-white transition-colors">Email</a>
+                <a href="https://linkedin.com/in/tyler-hsiao" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://github.com/tylerthsiao" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a>
+            </div>
+
+            <p class="text-xs text-slate-500">
+                &copy; <span id="year"></span> Tyler Hsiao. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme Switcher Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeMoon = document.getElementById('themeMoon');
+        const themeSun = document.getElementById('themeSun');
+
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                themeMoon.classList.remove('hidden');
+                themeSun.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeMoon.classList.add('hidden');
+                themeSun.classList.remove('hidden');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeMoon.classList.add('hidden');
+                themeSun.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeMoon.classList.remove('hidden');
+                themeSun.classList.add('hidden');
+            }
+        });
+
+        initTheme();
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Copy to clipboard helper function
+        function copyToClipboard(text, message) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast(message || 'Copied to clipboard!');
+            } catch (err) {
+                console.error('Copy failed:', err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Toast Notification System
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = msg;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
